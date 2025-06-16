@@ -8,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from '@/components/ui/dialog';
 import { mockPatients } from '@/data/mockData';
 import { Patient } from '@/types';
-import { Edit, User, Calendar, FileText } from 'lucide-react';
+import { Edit, User, Calendar, FileText, X } from 'lucide-react';
 import { toast } from 'sonner';
 
 export const PatientManagement = () => {

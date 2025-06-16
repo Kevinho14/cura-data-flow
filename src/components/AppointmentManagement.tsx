@@ -28,7 +28,7 @@ export const AppointmentManagement = () => {
     doctorId: '',
     date: '',
     time: '',
-    type: 'consulta' as 'consulta' | 'exame',
+    type: 'consulta' as 'consulta' | 'exame' | 'retorno' | 'emergencia',
     status: 'agendado' as 'agendado' | 'confirmado' | 'cancelado' | 'concluido',
     notes: ''
   });
