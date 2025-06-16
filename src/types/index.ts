@@ -30,7 +30,7 @@ export interface Appointment {
   doctorName: string;
   date: string;
   time: string;
-  type: 'consulta' | 'exame';
+  type: 'consulta' | 'exame' | 'retorno' | 'emergencia';
   status: 'agendado' | 'confirmado' | 'cancelado' | 'concluido';
   notes: string;
   createdAt: string;
