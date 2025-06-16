@@ -100,36 +100,36 @@ export const DoctorManagement = () => {
   };
 
   const specialtyColors = {
-    'Cardiologia': 'from-red-500 to-pink-500',
-    'Dermatologia': 'from-yellow-500 to-orange-500',
-    'Neurologia': 'from-purple-500 to-indigo-500',
-    'Ortopedia': 'from-blue-500 to-cyan-500',
-    'Pediatria': 'from-green-500 to-emerald-500',
-    'Psiquiatria': 'from-indigo-500 to-purple-500'
+    'Cardiologia': 'from-red-600 to-red-800',
+    'Dermatologia': 'from-orange-600 to-orange-800',
+    'Neurologia': 'from-purple-600 to-purple-800',
+    'Ortopedia': 'from-blue-600 to-blue-800',
+    'Pediatria': 'from-green-600 to-green-800',
+    'Psiquiatria': 'from-indigo-600 to-indigo-800'
   };
 
   const getSpecialtyColor = (specialty: string) => {
-    return specialtyColors[specialty as keyof typeof specialtyColors] || 'from-gray-500 to-slate-500';
+    return specialtyColors[specialty as keyof typeof specialtyColors] || 'from-gray-600 to-gray-800';
   };
 
   return (
     <div className="space-y-8">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold text-gray-900">
             Gerenciamento de Médicos
           </h1>
-          <p className="text-gray-600 mt-2">Cadastre e gerencie informações dos médicos</p>
+          <p className="text-gray-700 mt-2">Cadastre e gerencie informações dos médicos</p>
         </div>
         
         <Dialog open={isDialogOpen} onOpenChange={handleDialogClose}>
           <DialogTrigger asChild>
-            <Button onClick={handleNewDoctor} className="bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white">
+            <Button onClick={handleNewDoctor} className="bg-green-600 hover:bg-green-700 text-white border-0">
               <User className="h-4 w-4 mr-2" />
               Novo Médico
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+          <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto bg-white">
             <DialogHeader>
               <DialogTitle className="text-2xl text-gray-900">
                 {selectedDoctor ? 'Editar Médico' : 'Cadastrar Novo Médico'}
@@ -141,18 +141,18 @@ export const DoctorManagement = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-sm font-medium text-gray-700">Nome Completo *</Label>
+                  <Label htmlFor="name" className="text-sm font-medium text-gray-800">Nome Completo *</Label>
                   <Input
                     id="name"
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
                     placeholder="Digite o nome completo"
                     required
-                    className="h-11"
+                    className="h-11 border-gray-300 focus:border-green-500"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm font-medium text-gray-700">Email *</Label>
+                  <Label htmlFor="email" className="text-sm font-medium text-gray-800">Email *</Label>
                   <Input
                     id="email"
                     type="email"
@@ -160,66 +160,66 @@ export const DoctorManagement = () => {
                     onChange={(e) => setFormData({...formData, email: e.target.value})}
                     placeholder="doutor@hospital.com"
                     required
-                    className="h-11"
+                    className="h-11 border-gray-300 focus:border-green-500"
                   />
                 </div>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-sm font-medium text-gray-700">Telefone *</Label>
+                  <Label htmlFor="phone" className="text-sm font-medium text-gray-800">Telefone *</Label>
                   <Input
                     id="phone"
                     value={formData.phone}
                     onChange={(e) => setFormData({...formData, phone: e.target.value})}
                     placeholder="(11) 99999-9999"
                     required
-                    className="h-11"
+                    className="h-11 border-gray-300 focus:border-green-500"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="crm" className="text-sm font-medium text-gray-700">CRM *</Label>
+                  <Label htmlFor="crm" className="text-sm font-medium text-gray-800">CRM *</Label>
                   <Input
                     id="crm"
                     value={formData.crm}
                     onChange={(e) => setFormData({...formData, crm: e.target.value})}
                     placeholder="CRM/SP 123456"
                     required
-                    className="h-11"
+                    className="h-11 border-gray-300 focus:border-green-500"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="specialty" className="text-sm font-medium text-gray-700">Especialidade *</Label>
+                  <Label htmlFor="specialty" className="text-sm font-medium text-gray-800">Especialidade *</Label>
                   <Input
                     id="specialty"
                     value={formData.specialty}
                     onChange={(e) => setFormData({...formData, specialty: e.target.value})}
                     placeholder="Ex: Cardiologia"
                     required
-                    className="h-11"
+                    className="h-11 border-gray-300 focus:border-green-500"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="department" className="text-sm font-medium text-gray-700">Departamento *</Label>
+                  <Label htmlFor="department" className="text-sm font-medium text-gray-800">Departamento *</Label>
                   <Input
                     id="department"
                     value={formData.department}
                     onChange={(e) => setFormData({...formData, department: e.target.value})}
                     placeholder="Ex: Cardio"
                     required
-                    className="h-11"
+                    className="h-11 border-gray-300 focus:border-green-500"
                   />
                 </div>
               </div>
 
-              <div className="flex justify-end gap-3 pt-4 border-t">
-                <Button type="button" variant="outline" onClick={handleDialogClose}>
+              <div className="flex justify-end gap-3 pt-4 border-t border-gray-200">
+                <Button type="button" variant="outline" onClick={handleDialogClose} className="border-gray-300 text-gray-700 hover:bg-gray-100">
                   Cancelar
                 </Button>
-                <Button type="submit" className="bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white">
+                <Button type="submit" className="bg-green-600 hover:bg-green-700 text-white border-0">
                   {selectedDoctor ? 'Atualizar Médico' : 'Cadastrar Médico'}
                 </Button>
               </div>
@@ -231,7 +231,7 @@ export const DoctorManagement = () => {
       {/* Doctors Grid */}
       <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
         {doctors.map((doctor) => (
-          <Card key={doctor.id} className="group hover:shadow-xl transition-all duration-300 border border-gray-200 shadow-md hover:-translate-y-1 bg-white">
+          <Card key={doctor.id} className="group hover:shadow-xl transition-all duration-300 border-2 border-gray-300 shadow-md hover:-translate-y-1 bg-white">
             <CardHeader className="pb-3">
               <div className="flex justify-between items-start">
                 <div className="flex items-center space-x-3">
@@ -239,10 +239,10 @@ export const DoctorManagement = () => {
                     <Stethoscope className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <CardTitle className="text-lg text-gray-900 group-hover:text-green-600 transition-colors">
+                    <CardTitle className="text-lg text-gray-900 group-hover:text-green-700 transition-colors">
                       Dr(a). {doctor.name}
                     </CardTitle>
-                    <p className="text-sm text-gray-600 flex items-center mt-1">
+                    <p className="text-sm text-gray-700 flex items-center mt-1">
                       <Building2 className="h-3 w-3 mr-1" />
                       {doctor.specialty}
                     </p>
@@ -253,7 +253,7 @@ export const DoctorManagement = () => {
                     variant="ghost"
                     size="sm"
                     onClick={() => handleEdit(doctor)}
-                    className="h-8 w-8 p-0 hover:bg-green-100 hover:text-green-600"
+                    className="h-8 w-8 p-0 hover:bg-green-100 hover:text-green-700"
                   >
                     <Edit className="h-4 w-4" />
                   </Button>
@@ -261,7 +261,7 @@ export const DoctorManagement = () => {
                     variant="ghost"
                     size="sm"
                     onClick={() => handleDelete(doctor.id, doctor.name)}
-                    className="h-8 w-8 p-0 hover:bg-red-100 hover:text-red-600"
+                    className="h-8 w-8 p-0 hover:bg-red-100 hover:text-red-700"
                   >
                     <X className="h-4 w-4" />
                   </Button>
@@ -271,24 +271,24 @@ export const DoctorManagement = () => {
             <CardContent className="space-y-3">
               <div className="space-y-2">
                 <div className="flex items-center text-sm">
-                  <span className="font-medium text-gray-700 w-20">Email:</span>
+                  <span className="font-medium text-gray-800 w-20">Email:</span>
                   <span className="text-gray-900">{doctor.email}</span>
                 </div>
                 <div className="flex items-center text-sm">
-                  <span className="font-medium text-gray-700 w-20">Telefone:</span>
+                  <span className="font-medium text-gray-800 w-20">Telefone:</span>
                   <span className="text-gray-900">{doctor.phone}</span>
                 </div>
                 <div className="flex items-center text-sm">
-                  <span className="font-medium text-gray-700 w-20">CRM:</span>
+                  <span className="font-medium text-gray-800 w-20">CRM:</span>
                   <span className="text-gray-900">{doctor.crm}</span>
                 </div>
                 <div className="flex items-center text-sm">
-                  <span className="font-medium text-gray-700 w-20">Depto:</span>
+                  <span className="font-medium text-gray-800 w-20">Depto:</span>
                   <span className="text-gray-900">{doctor.department}</span>
                 </div>
               </div>
               
-              <div className="flex justify-between items-center pt-2 text-xs text-gray-500 border-t border-gray-200">
+              <div className="flex justify-between items-center pt-2 text-xs text-gray-600 border-t border-gray-200">
                 <span>Cadastrado em {new Date(doctor.createdAt).toLocaleDateString('pt-BR')}</span>
               </div>
             </CardContent>
@@ -298,9 +298,9 @@ export const DoctorManagement = () => {
 
       {doctors.length === 0 && (
         <div className="text-center py-12">
-          <Stethoscope className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+          <Stethoscope className="h-16 w-16 text-gray-500 mx-auto mb-4" />
           <h3 className="text-lg font-medium text-gray-900 mb-2">Nenhum médico cadastrado</h3>
-          <p className="text-gray-600">Comece cadastrando o primeiro médico do sistema.</p>
+          <p className="text-gray-700">Comece cadastrando o primeiro médico do sistema.</p>
         </div>
       )}
     </div>

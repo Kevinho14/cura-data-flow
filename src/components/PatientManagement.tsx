@@ -70,15 +70,15 @@ export const PatientManagement = () => {
     <div className="space-y-8">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold text-gray-900">
             Gerenciamento de Pacientes
           </h1>
-          <p className="text-gray-600 mt-2">Cadastre e gerencie informações dos pacientes</p>
+          <p className="text-gray-700 font-medium mt-2">Cadastre e gerencie informações dos pacientes</p>
         </div>
         
         <Dialog open={isDialogOpen} onOpenChange={handleDialogClose}>
           <DialogTrigger asChild>
-            <Button onClick={handleNewPatient} className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white">
+            <Button onClick={handleNewPatient} className="bg-blue-600 hover:bg-blue-700 text-white border-0">
               <User className="h-4 w-4 mr-2" />
               Novo Paciente
             </Button>

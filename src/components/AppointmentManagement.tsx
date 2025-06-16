@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -13,10 +12,10 @@ import { Calendar, Edit, Clock, User, Stethoscope, X } from 'lucide-react';
 import { toast } from 'sonner';
 
 const appointmentTypes = [
-  { value: 'consulta', label: 'Consulta Médica', color: 'bg-blue-500 text-white' },
-  { value: 'exame', label: 'Exame', color: 'bg-purple-500 text-white' },
-  { value: 'retorno', label: 'Retorno', color: 'bg-green-500 text-white' },
-  { value: 'emergencia', label: 'Emergência', color: 'bg-red-500 text-white' }
+  { value: 'consulta', label: 'Consulta Médica', color: 'bg-blue-600 text-white' },
+  { value: 'exame', label: 'Exame', color: 'bg-purple-600 text-white' },
+  { value: 'retorno', label: 'Retorno', color: 'bg-green-600 text-white' },
+  { value: 'emergencia', label: 'Emergência', color: 'bg-red-600 text-white' }
 ];
 
 export const AppointmentManagement = () => {
@@ -130,37 +129,37 @@ export const AppointmentManagement = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'agendado': return 'bg-blue-500 text-white';
-      case 'confirmado': return 'bg-green-500 text-white';
-      case 'cancelado': return 'bg-red-500 text-white';
-      case 'concluido': return 'bg-gray-500 text-white';
-      default: return 'bg-gray-500 text-white';
+      case 'agendado': return 'bg-blue-600 text-white';
+      case 'confirmado': return 'bg-green-600 text-white';
+      case 'cancelado': return 'bg-red-600 text-white';
+      case 'concluido': return 'bg-gray-600 text-white';
+      default: return 'bg-gray-600 text-white';
     }
   };
 
   const getTypeColor = (type: string) => {
     const foundType = appointmentTypes.find(t => t.value === type);
-    return foundType?.color || 'bg-gray-500 text-white';
+    return foundType?.color || 'bg-gray-600 text-white';
   };
 
   return (
     <div className="space-y-8">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold text-gray-900">
             Gerenciamento de Consultas
           </h1>
-          <p className="text-gray-600 mt-2">Agende e gerencie consultas e exames</p>
+          <p className="text-gray-700 mt-2">Agende e gerencie consultas e exames</p>
         </div>
         
         <Dialog open={isDialogOpen} onOpenChange={handleDialogClose}>
           <DialogTrigger asChild>
-            <Button onClick={handleNewAppointment} className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white">
+            <Button onClick={handleNewAppointment} className="bg-purple-600 hover:bg-purple-700 text-white border-0">
               <Calendar className="h-4 w-4 mr-2" />
               Nova Consulta
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+          <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto bg-white">
             <DialogHeader>
               <DialogTitle className="text-2xl text-gray-900">
                 {selectedAppointment ? 'Editar Consulta' : 'Agendar Nova Consulta'}
@@ -172,12 +171,12 @@ export const AppointmentManagement = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="patientId" className="text-sm font-medium text-gray-700">Paciente *</Label>
+                  <Label htmlFor="patientId" className="text-sm font-medium text-gray-800">Paciente *</Label>
                   <Select value={formData.patientId} onValueChange={(value) => setFormData({...formData, patientId: value})}>
-                    <SelectTrigger className="h-11">
+                    <SelectTrigger className="h-11 border-gray-300 focus:border-purple-500">
                       <SelectValue placeholder="Selecione um paciente" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-white">
                       {mockPatients.map((patient) => (
                         <SelectItem key={patient.id} value={patient.id}>
                           <div className="flex items-center space-x-2">
@@ -190,12 +189,12 @@ export const AppointmentManagement = () => {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="doctorId" className="text-sm font-medium text-gray-700">Médico *</Label>
+                  <Label htmlFor="doctorId" className="text-sm font-medium text-gray-800">Médico *</Label>
                   <Select value={formData.doctorId} onValueChange={(value) => setFormData({...formData, doctorId: value})}>
-                    <SelectTrigger className="h-11">
+                    <SelectTrigger className="h-11 border-gray-300 focus:border-purple-500">
                       <SelectValue placeholder="Selecione um médico" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-white">
                       {mockDoctors.map((doctor) => (
                         <SelectItem key={doctor.id} value={doctor.id}>
                           <div className="flex items-center space-x-2">
@@ -211,34 +210,34 @@ export const AppointmentManagement = () => {
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="date" className="text-sm font-medium text-gray-700">Data *</Label>
+                  <Label htmlFor="date" className="text-sm font-medium text-gray-800">Data *</Label>
                   <Input
                     id="date"
                     type="date"
                     value={formData.date}
                     onChange={(e) => setFormData({...formData, date: e.target.value})}
                     required
-                    className="h-11"
+                    className="h-11 border-gray-300 focus:border-purple-500"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="time" className="text-sm font-medium text-gray-700">Horário *</Label>
+                  <Label htmlFor="time" className="text-sm font-medium text-gray-800">Horário *</Label>
                   <Input
                     id="time"
                     type="time"
                     value={formData.time}
                     onChange={(e) => setFormData({...formData, time: e.target.value})}
                     required
-                    className="h-11"
+                    className="h-11 border-gray-300 focus:border-purple-500"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="type" className="text-sm font-medium text-gray-700">Tipo *</Label>
+                  <Label htmlFor="type" className="text-sm font-medium text-gray-800">Tipo *</Label>
                   <Select value={formData.type} onValueChange={(value: any) => setFormData({...formData, type: value})}>
-                    <SelectTrigger className="h-11">
+                    <SelectTrigger className="h-11 border-gray-300 focus:border-purple-500">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-white">
                       {appointmentTypes.map((type) => (
                         <SelectItem key={type.value} value={type.value}>
                           {type.label}
@@ -250,12 +249,12 @@ export const AppointmentManagement = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="status" className="text-sm font-medium text-gray-700">Status</Label>
+                <Label htmlFor="status" className="text-sm font-medium text-gray-800">Status</Label>
                 <Select value={formData.status} onValueChange={(value: any) => setFormData({...formData, status: value})}>
-                  <SelectTrigger className="h-11">
+                  <SelectTrigger className="h-11 border-gray-300 focus:border-purple-500">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-white">
                     <SelectItem value="agendado">Agendado</SelectItem>
                     <SelectItem value="confirmado">Confirmado</SelectItem>
                     <SelectItem value="cancelado">Cancelado</SelectItem>
@@ -265,22 +264,22 @@ export const AppointmentManagement = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="notes" className="text-sm font-medium text-gray-700">Observações</Label>
+                <Label htmlFor="notes" className="text-sm font-medium text-gray-800">Observações</Label>
                 <Textarea
                   id="notes"
                   value={formData.notes}
                   onChange={(e) => setFormData({...formData, notes: e.target.value})}
                   placeholder="Observações sobre a consulta, preparos necessários, etc..."
                   rows={3}
-                  className="resize-none"
+                  className="resize-none border-gray-300 focus:border-purple-500"
                 />
               </div>
 
-              <div className="flex justify-end gap-3 pt-4 border-t">
-                <Button type="button" variant="outline" onClick={handleDialogClose}>
+              <div className="flex justify-end gap-3 pt-4 border-t border-gray-200">
+                <Button type="button" variant="outline" onClick={handleDialogClose} className="border-gray-300 text-gray-700 hover:bg-gray-100">
                   Cancelar
                 </Button>
-                <Button type="submit" className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white">
+                <Button type="submit" className="bg-purple-600 hover:bg-purple-700 text-white border-0">
                   {selectedAppointment ? 'Atualizar Consulta' : 'Agendar Consulta'}
                 </Button>
               </div>
@@ -292,18 +291,18 @@ export const AppointmentManagement = () => {
       {/* Appointments Grid */}
       <div className="grid gap-6 lg:grid-cols-2">
         {appointments.map((appointment) => (
-          <Card key={appointment.id} className="group hover:shadow-xl transition-all duration-300 border border-gray-200 shadow-md hover:-translate-y-1 bg-white">
+          <Card key={appointment.id} className="group hover:shadow-xl transition-all duration-300 border-2 border-gray-300 shadow-md hover:-translate-y-1 bg-white">
             <CardHeader className="pb-3">
               <div className="flex justify-between items-start">
                 <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-purple-800 rounded-full flex items-center justify-center">
                     <Calendar className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <CardTitle className="text-lg text-gray-900 group-hover:text-purple-600 transition-colors">
+                    <CardTitle className="text-lg text-gray-900 group-hover:text-purple-700 transition-colors">
                       {appointment.patientName}
                     </CardTitle>
-                    <p className="text-sm text-gray-600 flex items-center mt-1">
+                    <p className="text-sm text-gray-700 flex items-center mt-1">
                       <Stethoscope className="h-3 w-3 mr-1" />
                       Dr(a). {appointment.doctorName}
                     </p>
@@ -318,7 +317,7 @@ export const AppointmentManagement = () => {
                       variant="ghost"
                       size="sm"
                       onClick={() => handleEdit(appointment)}
-                      className="h-8 w-8 p-0 hover:bg-purple-100 hover:text-purple-600"
+                      className="h-8 w-8 p-0 hover:bg-purple-100 hover:text-purple-700"
                     >
                       <Edit className="h-4 w-4" />
                     </Button>
@@ -326,7 +325,7 @@ export const AppointmentManagement = () => {
                       variant="ghost"
                       size="sm"
                       onClick={() => handleDelete(appointment.id, appointment.patientName)}
-                      className="h-8 w-8 p-0 hover:bg-red-100 hover:text-red-600"
+                      className="h-8 w-8 p-0 hover:bg-red-100 hover:text-red-700"
                     >
                       <X className="h-4 w-4" />
                     </Button>
@@ -357,7 +356,7 @@ export const AppointmentManagement = () => {
                 </div>
               )}
               
-              <div className="flex justify-between items-center pt-2 text-xs text-gray-500 border-t border-gray-200">
+              <div className="flex justify-between items-center pt-2 text-xs text-gray-600 border-t border-gray-200">
                 <span>Agendado em {new Date(appointment.createdAt).toLocaleDateString('pt-BR')}</span>
               </div>
             </CardContent>
@@ -367,9 +366,9 @@ export const AppointmentManagement = () => {
 
       {appointments.length === 0 && (
         <div className="text-center py-12">
-          <Calendar className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+          <Calendar className="h-16 w-16 text-gray-500 mx-auto mb-4" />
           <h3 className="text-lg font-medium text-gray-900 mb-2">Nenhuma consulta agendada</h3>
-          <p className="text-gray-600">Comece agendando a primeira consulta do sistema.</p>
+          <p className="text-gray-700">Comece agendando a primeira consulta do sistema.</p>
         </div>
       )}
     </div>
