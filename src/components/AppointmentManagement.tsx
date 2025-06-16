@@ -13,10 +13,10 @@ import { Calendar, Edit, Clock, User, Stethoscope, X } from 'lucide-react';
 import { toast } from 'sonner';
 
 const appointmentTypes = [
-  { value: 'consulta', label: 'Consulta Médica', color: 'bg-blue-100 text-blue-800' },
-  { value: 'exame', label: 'Exame', color: 'bg-purple-100 text-purple-800' },
-  { value: 'retorno', label: 'Retorno', color: 'bg-green-100 text-green-800' },
-  { value: 'emergencia', label: 'Emergência', color: 'bg-red-100 text-red-800' }
+  { value: 'consulta', label: 'Consulta Médica', color: 'bg-blue-500 text-white' },
+  { value: 'exame', label: 'Exame', color: 'bg-purple-500 text-white' },
+  { value: 'retorno', label: 'Retorno', color: 'bg-green-500 text-white' },
+  { value: 'emergencia', label: 'Emergência', color: 'bg-red-500 text-white' }
 ];
 
 export const AppointmentManagement = () => {
@@ -122,19 +122,25 @@ export const AppointmentManagement = () => {
     setSelectedAppointment(null);
   };
 
+  const handleNewAppointment = () => {
+    setSelectedAppointment(null);
+    resetForm();
+    setIsDialogOpen(true);
+  };
+
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'agendado': return 'bg-blue-100 text-blue-800';
-      case 'confirmado': return 'bg-green-100 text-green-800';
-      case 'cancelado': return 'bg-red-100 text-red-800';
-      case 'concluido': return 'bg-gray-100 text-gray-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'agendado': return 'bg-blue-500 text-white';
+      case 'confirmado': return 'bg-green-500 text-white';
+      case 'cancelado': return 'bg-red-500 text-white';
+      case 'concluido': return 'bg-gray-500 text-white';
+      default: return 'bg-gray-500 text-white';
     }
   };
 
   const getTypeColor = (type: string) => {
     const foundType = appointmentTypes.find(t => t.value === type);
-    return foundType?.color || 'bg-gray-100 text-gray-800';
+    return foundType?.color || 'bg-gray-500 text-white';
   };
 
   return (
@@ -144,29 +150,29 @@ export const AppointmentManagement = () => {
           <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
             Gerenciamento de Consultas
           </h1>
-          <p className="text-muted-foreground mt-2">Agende e gerencie consultas e exames</p>
+          <p className="text-gray-600 mt-2">Agende e gerencie consultas e exames</p>
         </div>
         
         <Dialog open={isDialogOpen} onOpenChange={handleDialogClose}>
           <DialogTrigger asChild>
-            <Button onClick={() => setIsDialogOpen(true)} className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700">
+            <Button onClick={handleNewAppointment} className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white">
               <Calendar className="h-4 w-4 mr-2" />
               Nova Consulta
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
             <DialogHeader>
-              <DialogTitle className="text-2xl">
+              <DialogTitle className="text-2xl text-gray-900">
                 {selectedAppointment ? 'Editar Consulta' : 'Agendar Nova Consulta'}
               </DialogTitle>
-              <DialogDescription>
+              <DialogDescription className="text-gray-600">
                 {selectedAppointment ? 'Atualize as informações da consulta' : 'Preencha os dados para agendar uma nova consulta'}
               </DialogDescription>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="patientId" className="text-sm font-medium">Paciente *</Label>
+                  <Label htmlFor="patientId" className="text-sm font-medium text-gray-700">Paciente *</Label>
                   <Select value={formData.patientId} onValueChange={(value) => setFormData({...formData, patientId: value})}>
                     <SelectTrigger className="h-11">
                       <SelectValue placeholder="Selecione um paciente" />
@@ -184,7 +190,7 @@ export const AppointmentManagement = () => {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="doctorId" className="text-sm font-medium">Médico *</Label>
+                  <Label htmlFor="doctorId" className="text-sm font-medium text-gray-700">Médico *</Label>
                   <Select value={formData.doctorId} onValueChange={(value) => setFormData({...formData, doctorId: value})}>
                     <SelectTrigger className="h-11">
                       <SelectValue placeholder="Selecione um médico" />
@@ -205,7 +211,7 @@ export const AppointmentManagement = () => {
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="date" className="text-sm font-medium">Data *</Label>
+                  <Label htmlFor="date" className="text-sm font-medium text-gray-700">Data *</Label>
                   <Input
                     id="date"
                     type="date"
@@ -216,7 +222,7 @@ export const AppointmentManagement = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="time" className="text-sm font-medium">Horário *</Label>
+                  <Label htmlFor="time" className="text-sm font-medium text-gray-700">Horário *</Label>
                   <Input
                     id="time"
                     type="time"
@@ -227,7 +233,7 @@ export const AppointmentManagement = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="type" className="text-sm font-medium">Tipo *</Label>
+                  <Label htmlFor="type" className="text-sm font-medium text-gray-700">Tipo *</Label>
                   <Select value={formData.type} onValueChange={(value: any) => setFormData({...formData, type: value})}>
                     <SelectTrigger className="h-11">
                       <SelectValue />
@@ -244,7 +250,7 @@ export const AppointmentManagement = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="status" className="text-sm font-medium">Status</Label>
+                <Label htmlFor="status" className="text-sm font-medium text-gray-700">Status</Label>
                 <Select value={formData.status} onValueChange={(value: any) => setFormData({...formData, status: value})}>
                   <SelectTrigger className="h-11">
                     <SelectValue />
@@ -259,7 +265,7 @@ export const AppointmentManagement = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="notes" className="text-sm font-medium">Observações</Label>
+                <Label htmlFor="notes" className="text-sm font-medium text-gray-700">Observações</Label>
                 <Textarea
                   id="notes"
                   value={formData.notes}
@@ -274,7 +280,7 @@ export const AppointmentManagement = () => {
                 <Button type="button" variant="outline" onClick={handleDialogClose}>
                   Cancelar
                 </Button>
-                <Button type="submit" className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700">
+                <Button type="submit" className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white">
                   {selectedAppointment ? 'Atualizar Consulta' : 'Agendar Consulta'}
                 </Button>
               </div>
@@ -286,18 +292,18 @@ export const AppointmentManagement = () => {
       {/* Appointments Grid */}
       <div className="grid gap-6 lg:grid-cols-2">
         {appointments.map((appointment) => (
-          <Card key={appointment.id} className="group hover:shadow-xl transition-all duration-300 border-0 shadow-md hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50/50">
+          <Card key={appointment.id} className="group hover:shadow-xl transition-all duration-300 border border-gray-200 shadow-md hover:-translate-y-1 bg-white">
             <CardHeader className="pb-3">
               <div className="flex justify-between items-start">
                 <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full flex items-center justify-center">
-                    <Calendar className="h-6 w-6 text-purple-600" />
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                    <Calendar className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <CardTitle className="text-lg group-hover:text-purple-600 transition-colors">
+                    <CardTitle className="text-lg text-gray-900 group-hover:text-purple-600 transition-colors">
                       {appointment.patientName}
                     </CardTitle>
-                    <p className="text-sm text-muted-foreground flex items-center mt-1">
+                    <p className="text-sm text-gray-600 flex items-center mt-1">
                       <Stethoscope className="h-3 w-3 mr-1" />
                       Dr(a). {appointment.doctorName}
                     </p>
@@ -332,12 +338,12 @@ export const AppointmentManagement = () => {
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
                   <div className="flex items-center text-sm">
-                    <Calendar className="h-4 w-4 mr-1 text-gray-500" />
-                    <span className="font-medium">{new Date(appointment.date).toLocaleDateString('pt-BR')}</span>
+                    <Calendar className="h-4 w-4 mr-1 text-gray-600" />
+                    <span className="font-medium text-gray-900">{new Date(appointment.date).toLocaleDateString('pt-BR')}</span>
                   </div>
                   <div className="flex items-center text-sm">
-                    <Clock className="h-4 w-4 mr-1 text-gray-500" />
-                    <span className="font-medium">{appointment.time}</span>
+                    <Clock className="h-4 w-4 mr-1 text-gray-600" />
+                    <span className="font-medium text-gray-900">{appointment.time}</span>
                   </div>
                 </div>
                 <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(appointment.status)}`}>
@@ -346,12 +352,12 @@ export const AppointmentManagement = () => {
               </div>
               
               {appointment.notes && (
-                <div className="pt-3 border-t border-gray-100">
-                  <p className="text-sm text-gray-700">{appointment.notes}</p>
+                <div className="pt-3 border-t border-gray-200">
+                  <p className="text-sm text-gray-800">{appointment.notes}</p>
                 </div>
               )}
               
-              <div className="flex justify-between items-center pt-2 text-xs text-gray-500">
+              <div className="flex justify-between items-center pt-2 text-xs text-gray-500 border-t border-gray-200">
                 <span>Agendado em {new Date(appointment.createdAt).toLocaleDateString('pt-BR')}</span>
               </div>
             </CardContent>
@@ -361,9 +367,9 @@ export const AppointmentManagement = () => {
 
       {appointments.length === 0 && (
         <div className="text-center py-12">
-          <Calendar className="h-16 w-16 text-gray-300 mx-auto mb-4" />
+          <Calendar className="h-16 w-16 text-gray-400 mx-auto mb-4" />
           <h3 className="text-lg font-medium text-gray-900 mb-2">Nenhuma consulta agendada</h3>
-          <p className="text-gray-500">Comece agendando a primeira consulta do sistema.</p>
+          <p className="text-gray-600">Comece agendando a primeira consulta do sistema.</p>
         </div>
       )}
     </div>

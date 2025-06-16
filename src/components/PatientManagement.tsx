@@ -97,6 +97,12 @@ export const PatientManagement = () => {
     setSelectedPatient(null);
   };
 
+  const handleNewPatient = () => {
+    setSelectedPatient(null);
+    resetForm();
+    setIsDialogOpen(true);
+  };
+
   const calculateAge = (birthDate: string) => {
     const today = new Date();
     const birth = new Date(birthDate);
@@ -115,29 +121,29 @@ export const PatientManagement = () => {
           <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             Gerenciamento de Pacientes
           </h1>
-          <p className="text-muted-foreground mt-2">Cadastre e gerencie informações dos pacientes</p>
+          <p className="text-gray-600 mt-2">Cadastre e gerencie informações dos pacientes</p>
         </div>
         
         <Dialog open={isDialogOpen} onOpenChange={handleDialogClose}>
           <DialogTrigger asChild>
-            <Button onClick={() => setIsDialogOpen(true)} className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">
+            <Button onClick={handleNewPatient} className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white">
               <User className="h-4 w-4 mr-2" />
               Novo Paciente
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
             <DialogHeader>
-              <DialogTitle className="text-2xl">
+              <DialogTitle className="text-2xl text-gray-900">
                 {selectedPatient ? 'Editar Paciente' : 'Cadastrar Novo Paciente'}
               </DialogTitle>
-              <DialogDescription>
+              <DialogDescription className="text-gray-600">
                 {selectedPatient ? 'Atualize as informações do paciente' : 'Preencha os dados do novo paciente'}
               </DialogDescription>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-sm font-medium">Nome Completo *</Label>
+                  <Label htmlFor="name" className="text-sm font-medium text-gray-700">Nome Completo *</Label>
                   <Input
                     id="name"
                     value={formData.name}
@@ -148,7 +154,7 @@ export const PatientManagement = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm font-medium">Email *</Label>
+                  <Label htmlFor="email" className="text-sm font-medium text-gray-700">Email *</Label>
                   <Input
                     id="email"
                     type="email"
@@ -163,7 +169,7 @@ export const PatientManagement = () => {
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-sm font-medium">Telefone *</Label>
+                  <Label htmlFor="phone" className="text-sm font-medium text-gray-700">Telefone *</Label>
                   <Input
                     id="phone"
                     value={formData.phone}
@@ -174,7 +180,7 @@ export const PatientManagement = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="cpf" className="text-sm font-medium">CPF *</Label>
+                  <Label htmlFor="cpf" className="text-sm font-medium text-gray-700">CPF *</Label>
                   <Input
                     id="cpf"
                     value={formData.cpf}
@@ -185,7 +191,7 @@ export const PatientManagement = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="birthDate" className="text-sm font-medium">Data de Nascimento *</Label>
+                  <Label htmlFor="birthDate" className="text-sm font-medium text-gray-700">Data de Nascimento *</Label>
                   <Input
                     id="birthDate"
                     type="date"
@@ -198,7 +204,7 @@ export const PatientManagement = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="address" className="text-sm font-medium">Endereço Completo *</Label>
+                <Label htmlFor="address" className="text-sm font-medium text-gray-700">Endereço Completo *</Label>
                 <Input
                   id="address"
                   value={formData.address}
@@ -210,7 +216,7 @@ export const PatientManagement = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="medicalHistory" className="text-sm font-medium">Histórico Médico</Label>
+                <Label htmlFor="medicalHistory" className="text-sm font-medium text-gray-700">Histórico Médico</Label>
                 <Textarea
                   id="medicalHistory"
                   value={formData.medicalHistory}
@@ -225,7 +231,7 @@ export const PatientManagement = () => {
                 <Button type="button" variant="outline" onClick={handleDialogClose}>
                   Cancelar
                 </Button>
-                <Button type="submit" className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">
+                <Button type="submit" className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white">
                   {selectedPatient ? 'Atualizar Paciente' : 'Cadastrar Paciente'}
                 </Button>
               </div>
@@ -237,18 +243,18 @@ export const PatientManagement = () => {
       {/* Patients Grid */}
       <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
         {patients.map((patient) => (
-          <Card key={patient.id} className="group hover:shadow-xl transition-all duration-300 border-0 shadow-md hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50/50">
+          <Card key={patient.id} className="group hover:shadow-xl transition-all duration-300 border border-gray-200 shadow-md hover:-translate-y-1 bg-white">
             <CardHeader className="pb-3">
               <div className="flex justify-between items-start">
                 <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center">
-                    <User className="h-6 w-6 text-blue-600" />
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                    <User className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <CardTitle className="text-lg group-hover:text-blue-600 transition-colors">
+                    <CardTitle className="text-lg text-gray-900 group-hover:text-blue-600 transition-colors">
                       {patient.name}
                     </CardTitle>
-                    <p className="text-sm text-muted-foreground flex items-center mt-1">
+                    <p className="text-sm text-gray-600 flex items-center mt-1">
                       <Calendar className="h-3 w-3 mr-1" />
                       {calculateAge(patient.birthDate)} anos
                     </p>
@@ -277,32 +283,32 @@ export const PatientManagement = () => {
             <CardContent className="space-y-3">
               <div className="space-y-2">
                 <div className="flex items-center text-sm">
-                  <span className="font-medium text-gray-600 w-16">Email:</span>
+                  <span className="font-medium text-gray-700 w-16">Email:</span>
                   <span className="text-gray-900">{patient.email}</span>
                 </div>
                 <div className="flex items-center text-sm">
-                  <span className="font-medium text-gray-600 w-16">Fone:</span>
+                  <span className="font-medium text-gray-700 w-16">Fone:</span>
                   <span className="text-gray-900">{patient.phone}</span>
                 </div>
                 <div className="flex items-center text-sm">
-                  <span className="font-medium text-gray-600 w-16">CPF:</span>
+                  <span className="font-medium text-gray-700 w-16">CPF:</span>
                   <span className="text-gray-900">{patient.cpf}</span>
                 </div>
               </div>
               
               {patient.medicalHistory && (
-                <div className="pt-3 border-t border-gray-100">
+                <div className="pt-3 border-t border-gray-200">
                   <div className="flex items-start space-x-2">
-                    <FileText className="h-4 w-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                    <FileText className="h-4 w-4 text-gray-600 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="text-xs font-medium text-gray-600 mb-1">Histórico Médico:</p>
-                      <p className="text-xs text-gray-700 line-clamp-2">{patient.medicalHistory}</p>
+                      <p className="text-xs font-medium text-gray-700 mb-1">Histórico Médico:</p>
+                      <p className="text-xs text-gray-800 line-clamp-2">{patient.medicalHistory}</p>
                     </div>
                   </div>
                 </div>
               )}
               
-              <div className="flex justify-between items-center pt-2 text-xs text-gray-500">
+              <div className="flex justify-between items-center pt-2 text-xs text-gray-500 border-t border-gray-200">
                 <span>Cadastrado em {new Date(patient.createdAt).toLocaleDateString('pt-BR')}</span>
               </div>
             </CardContent>
@@ -312,9 +318,9 @@ export const PatientManagement = () => {
 
       {patients.length === 0 && (
         <div className="text-center py-12">
-          <User className="h-16 w-16 text-gray-300 mx-auto mb-4" />
+          <User className="h-16 w-16 text-gray-400 mx-auto mb-4" />
           <h3 className="text-lg font-medium text-gray-900 mb-2">Nenhum paciente cadastrado</h3>
-          <p className="text-gray-500">Comece cadastrando o primeiro paciente do sistema.</p>
+          <p className="text-gray-600">Comece cadastrando o primeiro paciente do sistema.</p>
         </div>
       )}
     </div>

@@ -93,17 +93,23 @@ export const DoctorManagement = () => {
     setSelectedDoctor(null);
   };
 
+  const handleNewDoctor = () => {
+    setSelectedDoctor(null);
+    resetForm();
+    setIsDialogOpen(true);
+  };
+
   const specialtyColors = {
-    'Cardiologia': 'from-red-100 to-pink-100 text-red-600',
-    'Dermatologia': 'from-yellow-100 to-orange-100 text-orange-600',
-    'Neurologia': 'from-purple-100 to-indigo-100 text-purple-600',
-    'Ortopedia': 'from-blue-100 to-cyan-100 text-blue-600',
-    'Pediatria': 'from-green-100 to-emerald-100 text-green-600',
-    'Psiquiatria': 'from-indigo-100 to-purple-100 text-indigo-600'
+    'Cardiologia': 'from-red-500 to-pink-500',
+    'Dermatologia': 'from-yellow-500 to-orange-500',
+    'Neurologia': 'from-purple-500 to-indigo-500',
+    'Ortopedia': 'from-blue-500 to-cyan-500',
+    'Pediatria': 'from-green-500 to-emerald-500',
+    'Psiquiatria': 'from-indigo-500 to-purple-500'
   };
 
   const getSpecialtyColor = (specialty: string) => {
-    return specialtyColors[specialty as keyof typeof specialtyColors] || 'from-gray-100 to-slate-100 text-gray-600';
+    return specialtyColors[specialty as keyof typeof specialtyColors] || 'from-gray-500 to-slate-500';
   };
 
   return (
@@ -113,29 +119,29 @@ export const DoctorManagement = () => {
           <h1 className="text-4xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
             Gerenciamento de Médicos
           </h1>
-          <p className="text-muted-foreground mt-2">Cadastre e gerencie informações dos médicos</p>
+          <p className="text-gray-600 mt-2">Cadastre e gerencie informações dos médicos</p>
         </div>
         
         <Dialog open={isDialogOpen} onOpenChange={handleDialogClose}>
           <DialogTrigger asChild>
-            <Button onClick={() => setIsDialogOpen(true)} className="bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700">
+            <Button onClick={handleNewDoctor} className="bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white">
               <User className="h-4 w-4 mr-2" />
               Novo Médico
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
             <DialogHeader>
-              <DialogTitle className="text-2xl">
+              <DialogTitle className="text-2xl text-gray-900">
                 {selectedDoctor ? 'Editar Médico' : 'Cadastrar Novo Médico'}
               </DialogTitle>
-              <DialogDescription>
+              <DialogDescription className="text-gray-600">
                 {selectedDoctor ? 'Atualize as informações do médico' : 'Preencha os dados do novo médico'}
               </DialogDescription>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-sm font-medium">Nome Completo *</Label>
+                  <Label htmlFor="name" className="text-sm font-medium text-gray-700">Nome Completo *</Label>
                   <Input
                     id="name"
                     value={formData.name}
@@ -146,7 +152,7 @@ export const DoctorManagement = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm font-medium">Email *</Label>
+                  <Label htmlFor="email" className="text-sm font-medium text-gray-700">Email *</Label>
                   <Input
                     id="email"
                     type="email"
@@ -161,7 +167,7 @@ export const DoctorManagement = () => {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-sm font-medium">Telefone *</Label>
+                  <Label htmlFor="phone" className="text-sm font-medium text-gray-700">Telefone *</Label>
                   <Input
                     id="phone"
                     value={formData.phone}
@@ -172,7 +178,7 @@ export const DoctorManagement = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="crm" className="text-sm font-medium">CRM *</Label>
+                  <Label htmlFor="crm" className="text-sm font-medium text-gray-700">CRM *</Label>
                   <Input
                     id="crm"
                     value={formData.crm}
@@ -186,7 +192,7 @@ export const DoctorManagement = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="specialty" className="text-sm font-medium">Especialidade *</Label>
+                  <Label htmlFor="specialty" className="text-sm font-medium text-gray-700">Especialidade *</Label>
                   <Input
                     id="specialty"
                     value={formData.specialty}
@@ -197,7 +203,7 @@ export const DoctorManagement = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="department" className="text-sm font-medium">Departamento *</Label>
+                  <Label htmlFor="department" className="text-sm font-medium text-gray-700">Departamento *</Label>
                   <Input
                     id="department"
                     value={formData.department}
@@ -213,7 +219,7 @@ export const DoctorManagement = () => {
                 <Button type="button" variant="outline" onClick={handleDialogClose}>
                   Cancelar
                 </Button>
-                <Button type="submit" className="bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700">
+                <Button type="submit" className="bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white">
                   {selectedDoctor ? 'Atualizar Médico' : 'Cadastrar Médico'}
                 </Button>
               </div>
@@ -225,18 +231,18 @@ export const DoctorManagement = () => {
       {/* Doctors Grid */}
       <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
         {doctors.map((doctor) => (
-          <Card key={doctor.id} className="group hover:shadow-xl transition-all duration-300 border-0 shadow-md hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50/50">
+          <Card key={doctor.id} className="group hover:shadow-xl transition-all duration-300 border border-gray-200 shadow-md hover:-translate-y-1 bg-white">
             <CardHeader className="pb-3">
               <div className="flex justify-between items-start">
                 <div className="flex items-center space-x-3">
                   <div className={`w-12 h-12 bg-gradient-to-br ${getSpecialtyColor(doctor.specialty)} rounded-full flex items-center justify-center`}>
-                    <Stethoscope className="h-6 w-6" />
+                    <Stethoscope className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <CardTitle className="text-lg group-hover:text-green-600 transition-colors">
+                    <CardTitle className="text-lg text-gray-900 group-hover:text-green-600 transition-colors">
                       Dr(a). {doctor.name}
                     </CardTitle>
-                    <p className="text-sm text-muted-foreground flex items-center mt-1">
+                    <p className="text-sm text-gray-600 flex items-center mt-1">
                       <Building2 className="h-3 w-3 mr-1" />
                       {doctor.specialty}
                     </p>
@@ -265,24 +271,24 @@ export const DoctorManagement = () => {
             <CardContent className="space-y-3">
               <div className="space-y-2">
                 <div className="flex items-center text-sm">
-                  <span className="font-medium text-gray-600 w-20">Email:</span>
+                  <span className="font-medium text-gray-700 w-20">Email:</span>
                   <span className="text-gray-900">{doctor.email}</span>
                 </div>
                 <div className="flex items-center text-sm">
-                  <span className="font-medium text-gray-600 w-20">Telefone:</span>
+                  <span className="font-medium text-gray-700 w-20">Telefone:</span>
                   <span className="text-gray-900">{doctor.phone}</span>
                 </div>
                 <div className="flex items-center text-sm">
-                  <span className="font-medium text-gray-600 w-20">CRM:</span>
+                  <span className="font-medium text-gray-700 w-20">CRM:</span>
                   <span className="text-gray-900">{doctor.crm}</span>
                 </div>
                 <div className="flex items-center text-sm">
-                  <span className="font-medium text-gray-600 w-20">Depto:</span>
+                  <span className="font-medium text-gray-700 w-20">Depto:</span>
                   <span className="text-gray-900">{doctor.department}</span>
                 </div>
               </div>
               
-              <div className="flex justify-between items-center pt-2 text-xs text-gray-500 border-t border-gray-100">
+              <div className="flex justify-between items-center pt-2 text-xs text-gray-500 border-t border-gray-200">
                 <span>Cadastrado em {new Date(doctor.createdAt).toLocaleDateString('pt-BR')}</span>
               </div>
             </CardContent>
@@ -292,9 +298,9 @@ export const DoctorManagement = () => {
 
       {doctors.length === 0 && (
         <div className="text-center py-12">
-          <Stethoscope className="h-16 w-16 text-gray-300 mx-auto mb-4" />
+          <Stethoscope className="h-16 w-16 text-gray-400 mx-auto mb-4" />
           <h3 className="text-lg font-medium text-gray-900 mb-2">Nenhum médico cadastrado</h3>
-          <p className="text-gray-500">Comece cadastrando o primeiro médico do sistema.</p>
+          <p className="text-gray-600">Comece cadastrando o primeiro médico do sistema.</p>
         </div>
       )}
     </div>
